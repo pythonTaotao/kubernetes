@@ -1,42 +1,63 @@
 部署步骤
+
 首先创建一个单独的namespace
+
 $ kubectl create ns logs
+
 $ git clone https://github.com/pythonTaotao/kubernetes.git
+
 $ cd kubernetes/k8s-ELK
+
 1、部署es
+
 $ helm install --name-template efk-els -n logs elasticsearch/
 
 NAME: efk-els
+
 LAST DEPLOYED: Fri May 22 17:00:27 2020
+
 NAMESPACE: logs
+
 STATUS: deployed
+
 REVISION: 1
+
 NOTES:
+
 The elasticsearch cluster has been installed.
+
+
 
 Elasticsearch can be accessed:
 
+
   * Within your cluster, at the following DNS name at port 9200:
+
 
     efk-els-elasticsearch-client.logs.svc
 
+
   * From outside the cluster, run these commands in the same shell:
+
 
     export POD_NAME=$(kubectl get pods --namespace logs -l "app=elasticsearch,component=client,release=efk-els" -o jsonpath="{.items[0].metadata.name}")
     echo "Visit http://127.0.0.1:9200 to use Elasticsearch"
     kubectl port-forward --namespace logs $POD_NAME 9200:9200
 
 检查安装是否OK
+
 a、查看pod是否running
-[root@master k8s-efk]# kubectl get po -n logs
-NAME                                            READY   STATUS    RESTARTS   AGE
+
+`[root@master k8s-efk]# kubectl get po -n logs`
+
+`NAME                                            READY   STATUS    RESTARTS   AGE
 efk-els-elasticsearch-client-547c6bc6dd-46z29   1/1     Running   0          2m11s
 efk-els-elasticsearch-client-547c6bc6dd-tcpfk   1/1     Running   0          2m11s
 efk-els-elasticsearch-data-0                    1/1     Running   0          2m11s
 efk-els-elasticsearch-data-1                    1/1     Running   0          74s
 efk-els-elasticsearch-master-0                  1/1     Running   0          2m11s
 efk-els-elasticsearch-master-1                  1/1     Running   0          66s
-efk-els-elasticsearch-master-2                  1/1     Running   0          29s
+efk-els-elasticsearch-master-2                  1/1     Running   0          29s`
 
 b、运行一个测试pod检查es端口启动是否在正常
 $ kubectl run cirros-$RANDOM --rm -it --image=cirros -- sh
