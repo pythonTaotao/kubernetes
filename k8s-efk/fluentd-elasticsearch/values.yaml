@@ -18,7 +18,7 @@ resources: {}
   #   memory: 200Mi
 
 elasticsearch:
-  host: 'efl-els-elasticsearch-client.logs.svc'
+  host: 'efk-els-elasticsearch-client.logs.svc'
   port: 9200
   scheme: 'http'
   ssl_version: TLSv1_2
