@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>学生信息页</title>
+        <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+        <meta content="yes" name="apple-mobile-web-app-capable"/>
+        <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+        <meta content="telephone=no" name="format-detection"/>
+        <link th:href="@{/css/style.css}" href="/css/style.css" rel="stylesheet" type="text/css"/>
+        <script th:src="@{/js/jquery.min.js}" src="/js/jquery.min.js"></script>
+    </head>
+    <body>
+        <section class="aui-flexView">
+            <header class="aui-navBar aui-navBar-fixed">
+                <a href="javascript:;" class="aui-navBar-item">
+                    <i class="icon icon-return" onclick="javascript:history.back()"></i>
+                </a>
+                <div class="aui-center">
+                    <span class="aui-center-title">学生信息</span>
+                </div>
+            </header>
+<!--            <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)} "></p>-->
+            <section class="aui-scrollView">
+                <div class="aui-code-box">
+                    <form th:action="@{/student/update}" method="post">
+                        <input type="hidden" name="id" th:value="${student.id}"/> <br/>
+                        <input type="hidden" name="password" th:value="${student.password}"/> <br/>
+                        <div class="text"> 学号：</div>
+                        <p class="aui-code-line">
+                            <input type="text" id="stuNo" class="aui-code-line-input" name="stuNo" th:value="${student.stuNo}"/>
+                            <span class="spa spa1"></span>
+                        </p>
+                        <div class="text"> 姓名：</div>
+                        <p class="aui-code-line">
+                            <input type="text" id="name" class="aui-code-line-input" name="name" th:value="${student.name}"/>
+                            <span class="spa spa4"></span>
+                        </p>
+                        <div class="text"> 班级：</div>
+                        <p class="aui-code-line">
+                            <input type="text" id="classId" class="aui-code-line-input" name="classId" th:value="${student.classId}"/> 
+                            <span class="spa spa5"></span>
+                        </p>
+                        <div class="text"> 邮箱：</div>
+                        <p class="aui-code-line">
+                            <input type="text" id="email" class="aui-code-line-input" name="email" th:value="${student.email}"/>
+                             <span class="spa spa6"></span>
+                        </p>
+                        <div class="text"> 手机：</div>
+                        <p class="aui-code-line">
+                            <input type="text" id="phone" class="aui-code-line-input" name="phone" th:value="${student.phone}"/> 
+                            <span class="spa spa7"></span>
+                        </p>
+                        <div class="aui-code-btn">
+                            <button type="submit" value="修改">修改</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+<!--            <a th:href="@{/toStuPage(stuNo=${student.stuNo})}">返回主页</a>-->
+            <div class="aui-code-box">
+                <a class="aui-code-btn" th:href="@{/toStuPage(stuNo=${student.stuNo})}">返回主页</a>
+            </div>
+        </section> 
+        <script th:inline="javascript">
+            window.onload=function(){
+                if ([[${msg}]]!=null) {
+                    alert([[${msg}]]);
+                }
+			}
+            /************************  失焦判断  **********************************/
+            $("input").blur(function(){
+				$(".spa").css("color","#BD362F")
+				if($(this).is("#name")){             //姓名判断
+					var na=/^[\u4E00-\u9FA5]{2,4}$/
+					if($("#name").val()!=""){
+						if(!(na.test($("#name").val()))){
+							$(".spa4").text("请输入2-4个汉字");
+							$(this).css("border","1px solid #BD362F")
+							return false;
+						}else if(na){
+							$(".spa4").text("");
+                            $(this).css("border","none");
+							return true;
+						}
+					}else{
+						$(".spa4").text("");
+					}
+				}
+                if($(this).is("#email")){            //邮箱判断
+					var em=/^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/
+					if ($("#email").val()!="") {
+						if(!(em.test($("#email").val()))){
+							$(".spa5").text("请输入正确邮箱地址");
+							$(this).css("border","1px solid #BD362F")
+							return false;
+						}else if(em){
+							$(".spa5").text("");
+                            $(this).css("border","none");
+							return true;
+						}
+					} else {
+						$(".spa5").text("");
+					}
+				}
+				if($(this).is("#phone")){            //手机号判断
+					var ph=/^1[3|5|7|8|][0-9]{9}$/
+					if ($("#phone").val()!="") {
+						if(!(ph.test($("#phone").val()))){
+							$(".spa7").text("请输入正确手机号");
+							$(this).css("border","1px solid #BD362F")
+							return false;
+						}else if(ph){
+							$(".spa7").text("");
+                            $(this).css("border","none");
+							return true;
+						}
+					} else {
+						$(".spa7").text("");
+					}
+				}
+			})
+		    /********************** 聚焦提示 ************************/	
+			$("input").focus(function(){
+                if($(this).is("#stuNo")){
+					$(this).css("border","1px solid #aaa")
+				}
+				if($(this).is("#name")){
+					$(".spa4").text("2-4个汉字").css("color","#aaa")
+					$(this).css("border","1px solid #aaa")
+				}
+                if($(this).is("#classId")){
+					$(this).css("border","1px solid #aaa")
+				}
+                if($(this).is("#email")){
+					$(this).css("border","1px solid #aaa")
+				}
+				if($(this).is("#phone")){
+					$(".spa7").text("11位手机号码").css("color","#aaa")
+					$(this).css("border","1px solid #aaa")
+				}
+			})
+        </script>       
+    </body>
+</html>

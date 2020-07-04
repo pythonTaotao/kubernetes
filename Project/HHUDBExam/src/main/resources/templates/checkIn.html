@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>近期签到记录</title>
+        <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+        <meta content="yes" name="apple-mobile-web-app-capable"/>
+        <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+        <meta content="telephone=no" name="format-detection"/>
+        <link th:href="@{/css/style.css}" href="/css/style.css" rel="stylesheet" type="text/css"/>
+        <script type="text/javascript" th:src="@{js/jquery.min.js}" src="/js/jquery.min.js"></script>
+    </head>
+    <body>
+        <section class="aui-flexView">
+            <header class="aui-navBar aui-navBar-fixed">
+                <a href="javascript:;" class="aui-navBar-item">
+                    <i class="icon icon-return" onclick="javascript:history.back()"></i>
+                </a>
+                <div class="aui-center">
+                    <span class="aui-center-title">学生签到</span>
+                </div>
+                <a href="javascript:;" class="aui-navBar-item">
+                    <i class="icon icon-sys"></i>
+                </a>
+            </header>
+            <p style="color: green" th:text="${msg}" th:if="${not #strings.isEmpty(msg)} "></p>
+            <section class="aui-scrollView">
+                <div class="aui-code-box">
+                    <div class="aui-code-btn">
+                        <a th:href="@{/student/addPunchIn(stuNo=${student.stuNo})}">签到</a>
+                    </div>
+                </div>
+                近期签到记录:<br/>
+                <table class="aui-tabBar-item">
+                    <tbody>
+                    <tr th:each="punchIn:${punchIns}">
+                        <td th:text="${punchIn.stuNo}"></td>
+                        <td>[[${punchIn.name}]]</td>
+                        <td th:text="${#dates.format(punchIn.punchInTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+            <div class="aui-code-box">
+                <a class="aui-code-btn" th:href="@{/toStuPage(stuNo=${student.stuNo})}">返回主页</a>
+            </div>
+        </section>
+
+
+    </body>
+</html>

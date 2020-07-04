@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>学生登录页</title>
+        <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+        <meta content="yes" name="apple-mobile-web-app-capable"/>
+        <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+        <meta content="telephone=no" name="format-detection"/>
+        <link href="css/style.css" rel="stylesheet" type="text/css"/>
+        <script type="text/javascript" th:src="@{js/jquery.min.js}"></script>
+    </head>
+    <body>
+        <section class="aui-flexView">
+            <header class="aui-navBar aui-navBar-fixed">
+                <a href="javascript:;" class="aui-navBar-item">
+                    <i class="icon icon-return"></i>
+                </a>
+                <div class="aui-center">
+                    <span class="aui-center-title">登录</span>
+                </div>
+                <a href="javascript:;" class="aui-navBar-item">
+                    <i class="icon icon-sys"></i>
+                </a>
+            </header>
+            <section class="aui-scrollView">
+                <div class="aui-code-box">
+                    <p class="aui-code-line">
+                        <input type="number" class="aui-code-line-input" name="search" value="" id="stuNo" autocomplete="off" placeholder="请输入学号">
+                    </p>
+                    <p class="aui-code-line aui-code-line-clear">
+                        <i class="aui-show  operate-eye-open"></i>
+                        <input type="password" class="aui-code-line-input password" id="password" placeholder="请输入密码" value="">
+                    </p>
+                    <div class="aui-flex-links">
+                        <a href="javascript:;">
+                            <label class="cell-right">
+                                <input type="checkbox" value="1" name="checkbox" checked="checked">
+                                <i class="cell-checkbox-icon"></i>记住密码
+                            </label>
+                        </a>
+                        <a onClick="alert('建设中')">忘记密码？</a>
+                    </div>
+                    <div class="aui-code-btn">
+                        <button onclick="login()">登录</button>
+                        <button class="register" onclick="reg()">注册</button>
+                        <!--a href="register.html">注册</a-->
+                    </div>
+                </div>
+
+            </section>
+        </section>
+
+        <script type="text/javascript">
+            //实现密码隐藏与显示
+            $('.aui-show').click(function() {
+                let pass_type = $('input.password').attr('type');
+
+                if (pass_type === 'password') {
+                    $('input.password').attr('type', 'text');
+                    $('.aui-show').removeClass('operate-eye-open').addClass('operate-eye-close');
+                } else {
+                    $('input.password').attr('type', 'password');
+                    $('.aui-show').removeClass('operate-eye-close').addClass('operate-eye-open');
+                }
+            })
+			//转到注册页
+			function reg(){
+                //这里遇到了问题，单独使用window.location.href无法实现跳转，加上window.event.returnValue=false;后解决
+                window.location.href="/toRegister";
+                //window.event.returnValue=false;
+			}
+
+            function login() {
+                var stuNo = $("#stuNo").val();
+                var password = $("#password").val();
+                $.ajax({
+                    type:"post",
+                    url:"/student/login",
+                    data:{stuNo:stuNo,password:password},
+                    success:function (result) {
+                        alert(result.msg);
+                        if (result.msg.toString() == "登录成功") {
+                            window.location.href="/toStuPage?stuNo="+stuNo;
+                        }
+                    }
+                });
+
+            }
+        </script>
+
+    </body>
+</html>

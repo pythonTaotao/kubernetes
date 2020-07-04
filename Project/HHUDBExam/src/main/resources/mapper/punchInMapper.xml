@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beryl.mapper.PunchInMapper">
+    <resultMap id="PMap" type="PunchIn">
+        <result property="punchInTime" column="punch_intime"/>
+    </resultMap>
+    <select id="queryPunchInList" resultMap="PMap">
+        select * from punch_in
+    </select>
+    <select id="queryListByStuNo" resultMap="PMap" parameterType="long">
+        select * from punch_in WHERE stuno=#{stuNo}
+    </select>
+    <select id="queryPunchInByStuNo" resultMap="PMap" parameterType="long">
+        select * from punch_in where stuno = #{stuNo}
+    </select>
+    <select id="queryLatestPunchIn" resultMap="PMap" parameterType="long">
+        SELECT * FROM punch_in WHERE stuno=#{stuNo} ORDER BY id DESC LIMIT 1
+    </select>
+    <insert id="addPunchIn" parameterType="PunchIn">
+        insert into punch_in(stuno,name,punch_intime) values(#{stuNo},#{name},#{punchInTime})
+    </insert>
+    <delete id="deletePunchInByStuNo" parameterType="long">
+        delete from punch_in where stuno = #{stuNo}
+    </delete>
+
+</mapper>

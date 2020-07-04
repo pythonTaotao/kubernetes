@@ -38,7 +38,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: tomcat-demo
-pec:
+spec:
   rules:
   - host: tomcat.mooc.com         #配置的域名，需要在本机上的hosts文件做绑定
     http:

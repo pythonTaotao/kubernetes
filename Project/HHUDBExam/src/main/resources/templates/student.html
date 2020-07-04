@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>学生界面</title>
+        <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+        <meta content="yes" name="apple-mobile-web-app-capable"/>
+        <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+        <meta content="telephone=no" name="format-detection"/>
+        <link href="css/style.css" rel="stylesheet" type="text/css"/>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+    </head>
+    <body>
+        <section class="aui-flexView">
+            <header class="aui-navBar aui-navBar-fixed">
+                <a href="javascript:;" class="aui-navBar-item">
+                    <i class="icon icon-return" onclick="javascript:history.back()"></i>
+                </a>
+                <div class="aui-center">
+                    <span class="aui-center-title">学生签到系统</span>
+                </div>
+                <a href="javascript:;" class="aui-navBar-item">
+                    <i class="icon icon-sys"></i>
+                </a>
+            </header>
+            <section class="aui-scrollView">
+                <div class="aui-code-box">
+                    <div class="aui-center">
+                        <span class="aui-code-btn" >欢迎[[${student.name}]]同学进入签到系统！</span>
+                    </div>
+                    <div class="aui-code-btn">
+                        <button class="register" onclick="checkIn()">学生签到</button>
+                        <button class="register" onclick="showStuInfo()">修改个人信息</button>
+                        <!--a href="register.html">注册</a-->
+                    </div>
+                </div>
+
+            </section>
+        </section>
+
+        <script th:inline="javascript">
+            function checkIn() {
+                window.location.href="/toCheckIn?stuNo="+[[${student.stuNo}]];
+                window.event.returnValue=false;
+            }
+            function showStuInfo() {
+                window.location.href="/student/showInfo?stuNo="+[[${student.stuNo}]];
+                window.event.returnValue=false;
+            }
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beryl.mapper.StudentMapper">
+
+    <select id="queryStuList" resultType="Student">
+        select * from student
+    </select>
+    <select id="queryStuByStuNo" resultType="Student" parameterType="long">
+        select * from student where stuno = #{stuNo}
+    </select>
+    <select id="queryStuById" resultType="Student" parameterType="int">
+        select * from student where id = #{id}
+    </select>
+    <insert id="addStudent" parameterType="Student">
+        insert into student(stuno,name,password,classid,email,phone) values(#{stuNo},#{name},#{password},#{classId},#{email},#{phone})
+    </insert>
+    <update id="updateStudent" parameterType="Student">
+        update student set stuno=#{stuNo},name=#{name},password=#{password},classid=#{classId},email=#{email},phone=#{phone} where id=#{id}
+    </update>
+    <delete id="deleteStudentByStuNo" parameterType="long">
+        delete from student where stuno=#{stuNo};
+    </delete>
+
+</mapper>
