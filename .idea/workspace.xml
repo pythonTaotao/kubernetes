@@ -10,10 +10,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a7a75f2b-6e74-425e-aebd-d4793919f0e6" name="Default Changelist" comment="add  dashboard-all.yaml">
+    <list default="true" id="a7a75f2b-6e74-425e-aebd-d4793919f0e6" name="Default Changelist" comment="增加一个考勤签到Springboot小项目">
+      <change afterPath="$PROJECT_DIR$/dashboard/dashboard-adminuser.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ingress-nginx/mandatory.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/ingress-nginx/mandatory.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ingress-nginx/tomcat-demo.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/ingress-nginx/tomcat-demo.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/dashboard-all.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/kubernetes-dashboard.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/kubernetes-dashboard.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,14 +32,17 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../pycharm workspace" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Project" />
     <property name="settings.editor.selected.configurable" value="tasks.servers" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Pycharm\kubernetes\Project\HHUDBExam" />
+      <recent name="D:\Pycharm\kubernetes\Project" />
       <recent name="D:\Pycharm\kubernetes\dashboard" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Pycharm\kubernetes\Project" />
       <recent name="D:\Pycharm\kubernetes\dashboard" />
     </key>
   </component>
@@ -74,7 +78,14 @@
       <option name="project" value="LOCAL" />
       <updated>1590415258113</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="增加一个考勤签到Springboot小项目">
+      <created>1593845549676</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1593845549677</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -93,7 +104,8 @@
     <MESSAGE value="删除多余的1.8+的metrics-server" />
     <MESSAGE value="idea文件" />
     <MESSAGE value="add  dashboard-all.yaml" />
-    <option name="LAST_COMMIT_MESSAGE" value="add  dashboard-all.yaml" />
+    <MESSAGE value="增加一个考勤签到Springboot小项目" />
+    <option name="LAST_COMMIT_MESSAGE" value="增加一个考勤签到Springboot小项目" />
   </component>
   <component name="WindowStateProjectService">
     <state x="604" y="265" key="#Notifications" timestamp="1590414881666">
@@ -120,21 +132,21 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="303" y="64" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1587914698851" />
-    <state x="325" y="147" key="Vcs.Push.Dialog.v2" timestamp="1590415263918">
+    <state x="325" y="147" key="Vcs.Push.Dialog.v2" timestamp="1593845572264">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="325" y="147" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1590415263918" />
-    <state x="596" y="332" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1590501053676">
+    <state x="325" y="147" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1593845572264" />
+    <state x="596" y="332" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1593845322237">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="596" y="332" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1590501053676" />
-    <state x="488" y="206" key="git4idea.merge.GitPullDialog" timestamp="1587914733592">
+    <state x="596" y="332" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1593845322237" />
+    <state x="488" y="206" key="git4idea.merge.GitPullDialog" timestamp="1593845567994">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="488" y="206" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1587914733592" />
-    <state x="395" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1590415261837">
+    <state x="488" y="206" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1593845567994" />
+    <state x="395" y="146" width="672" height="678" key="search.everywhere.popup" timestamp="1593845570520">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="395" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1590415261837" />
+    <state x="395" y="146" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1593845570520" />
   </component>
 </project>
