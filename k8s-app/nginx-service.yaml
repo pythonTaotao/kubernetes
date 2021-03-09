@@ -32,6 +32,7 @@ spec:
   ports:
   - port: 88
     targetPort: 80
+    nodePort: 30001
   selector:
     app: nginx
   type: NodePort
