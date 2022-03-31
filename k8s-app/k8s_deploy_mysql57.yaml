@@ -1,0 +1,93 @@
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-config
+data:
+  my.cnf: |
+    !includedir /etc/mysql/conf.d/
+    !includedir /etc/mysql/mysql.conf.d/
+
+    [mysqld]
+    server-id=001
+    log-bin=mysql-bin
+
+    gtid_mode=on
+    enforce_gtid_consistency=on
+
+    relay-log=relay-log.log
+    binlog_format=ROW
+    master_info_repository=TABLE
+    relay_log_info_repository=TABLE
+    sync_master_info=1
+    slave_parallel_workers=2
+    binlog_checksum=CRC32
+    master_verify_checksum=1
+    slave_sql_verify_checksum=1
+    binlog_rows_query_log_events=1
+    slave_parallel_type=logical_clock
+    general_log=1
+    log_output=FILE,TABLE
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  namespace: default
+  labels:
+    app: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      nodeSelector:
+        app: mysql
+      containers:
+      - name: mysql
+        image: mysql:5.7
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "1234qwer"
+        ports:
+        - containerPort: 3306
+          protocol: TCP
+          name: 3306tcp01
+        volumeMounts:
+        - name: mysql-data
+          mountPath: "/var/lib/mysql"
+        - name: mysql-conf
+          mountPath: "/etc/mysql/my.cnf"
+          subPath: my.cnf
+      volumes:
+      - name: mysql-data
+        hostPath:
+          path: /var/lib/mysql
+          type: Directory
+      - name: mysql-conf
+        configMap:
+          name: mysql-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-service
+  namespace: default
+  labels:
+    app: mysql-service
+spec:
+  type: NodePort
+  ports:
+  - port: 3306
+    name: http
+    targetPort: 3306
+    nodePort: 30006
+    protocol: TCP
+  selector:
+    app: mysql
