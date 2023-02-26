@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql-deployment
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+  replicas: 3                         #创建3个副本
+  serviceName: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:latest            #mysql镜像，直接选择最高版本
+        imagePullPolicy: Always        #允许自动拉取镜像
+        env:
+        - name: MYSQL_ROOT_PASSWORD    # 这里设置root的密码
+          value: test12345678
+        args: ["--default-authentication-plugin=mysql_native_password"]   #作用是解除高版本Mysql不允许账号密码连接远程mysql
+        resources:
+          requests:
+            cpu: "50m"
+            memory: 1Gi
+          limits:
+            cpu: "50m"
+            memory: 1Gi
+        volumeMounts:
+        - name: mysql-store
+          mountPath: home/storageVolume/mysql  # MySQL容器的数据默认都是存在这个目录
+          subPath: mysqldata                    # 这里通过subPath挂载到子目录，就可以避免出错
+  volumeClaimTemplates:
+  - metadata:
+      name: mysql-store
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: nfs-client
+      resources:
+        requests:
+          storage: 2G
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-service
+  labels:
+    app: mysql
+spec:
+  type: NodePort
+  selector:
+      app: mysql
+  ports:
+  - protocol : TCP
+    nodePort: 30306
+    port: 3306
+    targetPort: 3306
